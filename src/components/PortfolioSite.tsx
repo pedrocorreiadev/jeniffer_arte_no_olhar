@@ -17,6 +17,8 @@ import { buildWhatsAppUrl, formatPrice } from "@/lib/whatsapp";
 type LightboxImage = {
   src: string;
   alt: string;
+  width: number;
+  height: number;
   title?: string;
 };
 
@@ -386,8 +388,10 @@ function BeforeAfterSection() {
             <Image
               src={lightboxImage.src}
               alt={lightboxImage.alt}
-              fill
+              width={lightboxImage.width}
+              height={lightboxImage.height}
               sizes="100vw"
+              className="lightbox-image"
             />
           </div>
           {lightboxImage.title ? <p>{lightboxImage.title}</p> : null}
@@ -409,16 +413,24 @@ function AfterResultCard({
       className="after-result-card"
       type="button"
       onClick={() =>
-        onOpen({ src: result.src, alt: result.alt, title: result.title })
+        onOpen({
+          src: result.src,
+          alt: result.alt,
+          width: result.width,
+          height: result.height,
+          title: result.title
+        })
       }
     >
       <span className="after-result-media">
         <Image
           src={result.src}
           alt={result.alt}
-          fill
+          width={result.width}
+          height={result.height}
           sizes="(min-width: 900px) 32vw, 100vw"
           loading="lazy"
+          className="result-image"
         />
         <span>{result.label}</span>
       </span>
@@ -442,18 +454,22 @@ function BeforeAfterCard({
           type="button"
           onClick={() =>
             onOpen({
-              src: pair.beforeSrc,
-              alt: pair.beforeAlt,
+              src: pair.before.src,
+              alt: pair.before.alt,
+              width: pair.before.width,
+              height: pair.before.height,
               title: `${pair.title} - Antes`
             })
           }
         >
           <Image
-            src={pair.beforeSrc}
-            alt={pair.beforeAlt}
-            fill
+            src={pair.before.src}
+            alt={pair.before.alt}
+            width={pair.before.width}
+            height={pair.before.height}
             sizes="(min-width: 900px) 20vw, 50vw"
             loading="lazy"
+            className="result-image"
           />
           <span>Antes</span>
         </button>
@@ -461,18 +477,22 @@ function BeforeAfterCard({
           type="button"
           onClick={() =>
             onOpen({
-              src: pair.afterSrc,
-              alt: pair.afterAlt,
+              src: pair.after.src,
+              alt: pair.after.alt,
+              width: pair.after.width,
+              height: pair.after.height,
               title: `${pair.title} - Depois`
             })
           }
         >
           <Image
-            src={pair.afterSrc}
-            alt={pair.afterAlt}
-            fill
+            src={pair.after.src}
+            alt={pair.after.alt}
+            width={pair.after.width}
+            height={pair.after.height}
             sizes="(min-width: 900px) 20vw, 50vw"
             loading="lazy"
+            className="result-image"
           />
           <span>Depois</span>
         </button>
@@ -620,7 +640,8 @@ function OwnerPortrait({ priority = false }: { priority?: boolean }) {
       <Image
         src={business.ownerPhoto.src}
         alt={business.ownerPhoto.alt}
-        fill
+        width={business.ownerPhoto.width}
+        height={business.ownerPhoto.height}
         sizes="(min-width: 900px) 42vw, 100vw"
         priority={priority}
         className="portrait-image"

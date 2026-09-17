@@ -324,23 +324,21 @@ p {
 
 .portrait-card {
   position: relative;
-  min-height: min(70vw, 380px);
   overflow: hidden;
   border: 1px solid rgba(149, 82, 81, 0.18);
   border-radius: 28px 28px 8px 8px;
+  padding: 0.55rem;
   background:
     linear-gradient(145deg, rgba(255, 253, 251, 0.76), rgba(232, 211, 204, 0.86)),
     var(--rose);
   box-shadow: var(--shadow);
 }
 
-.hero-portrait {
-  min-height: min(72vw, 390px);
-}
-
 .portrait-image {
-  object-fit: contain;
-  object-position: center;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 22px 22px 6px 6px;
 }
 
 .portrait-fallback {
@@ -622,10 +620,12 @@ p {
 .gallery-grid {
   display: grid;
   gap: 0.85rem;
+  align-items: start;
 }
 
 .after-result-card,
 .before-after-card {
+  align-self: start;
   border: 1px solid rgba(48, 37, 40, 0.12);
   border-radius: var(--radius);
   background: rgba(255, 253, 251, 0.72);
@@ -643,16 +643,15 @@ p {
 .after-result-media {
   position: relative;
   display: block;
-  min-height: min(78vw, 310px);
   overflow: hidden;
   border-radius: var(--radius);
   background: var(--rose);
 }
 
-.after-result-media img,
-.before-after-grid img,
-.lightbox-frame img {
-  object-fit: contain;
+.result-image {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .after-result-media span {
@@ -665,6 +664,7 @@ p {
   color: var(--white);
   font-size: 0.78rem;
   font-weight: 850;
+  line-height: 1;
 }
 
 .after-result-card strong {
@@ -688,16 +688,18 @@ p {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
+  align-items: start;
 }
 
 .before-after-grid button {
   position: relative;
-  min-height: min(54vw, 210px);
   overflow: hidden;
   border: 0;
   border-radius: var(--radius);
+  padding: 0;
   background: var(--rose);
   cursor: pointer;
+  line-height: 0;
 }
 
 .before-after-grid span {
@@ -710,6 +712,7 @@ p {
   color: var(--white);
   font-size: 0.78rem;
   font-weight: 850;
+  line-height: 1;
 }
 
 .lightbox {
@@ -724,12 +727,23 @@ p {
 }
 
 .lightbox-frame {
-  position: relative;
+  display: grid;
+  place-items: center;
   width: min(100%, 980px);
-  height: min(74svh, 680px);
-  overflow: hidden;
+  max-height: 74svh;
+  overflow: visible;
   border-radius: var(--radius);
-  background: var(--coffee);
+  background: transparent;
+}
+
+.lightbox-image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 74svh;
+  border-radius: var(--radius);
+  object-fit: contain;
 }
 
 .lightbox-close {
@@ -756,10 +770,6 @@ p {
   background:
     linear-gradient(135deg, rgba(232, 211, 204, 0.76), rgba(250, 246, 242, 0.92)),
     var(--rose);
-}
-
-.about-portrait {
-  min-height: min(82vw, 400px);
 }
 
 .about-copy {

@@ -10,20 +10,23 @@ export type Service = {
   badge?: string;
 };
 
+export type ImageAsset = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
 export type BeforeAfterPair = {
   id: string;
-  beforeSrc: string;
-  afterSrc: string;
-  beforeAlt: string;
-  afterAlt: string;
+  before: ImageAsset;
+  after: ImageAsset;
   category: ServiceCategory;
   title: string;
 };
 
-export type BeforeAfterResult = {
+export type BeforeAfterResult = ImageAsset & {
   id: string;
-  src: string;
-  alt: string;
   category: ServiceCategory;
   title: string;
   label: "Depois";
@@ -41,6 +44,8 @@ export const business = {
   ownerPhoto: {
     src: "/images/perfil/jeniffer-souza.png",
     alt: "Jeniffer Souza, especialista em cílios e sobrancelhas",
+    width: 1254,
+    height: 1254,
     available: true
   }
 } as const;
@@ -84,30 +89,52 @@ export const services: Service[] = [
 export const beforeAfterPairs: BeforeAfterPair[] = [
   {
     id: "cacheada-combo",
-    beforeSrc: "/images/antes-depois/cacheada-antes.jpg",
-    afterSrc: "/images/antes-depois/cacheada-depois.jpg",
-    beforeAlt:
-      "Antes do atendimento de sobrancelhas e cílios em cliente de cabelo cacheado",
-    afterAlt:
-      "Depois do atendimento de sobrancelhas e cílios em cliente de cabelo cacheado",
+    before: {
+      src: "/images/antes-depois/cacheada-antes.jpg",
+      alt: "Antes do atendimento de sobrancelhas e cílios em cliente de cabelo cacheado",
+      width: 1080,
+      height: 1440
+    },
+    after: {
+      src: "/images/antes-depois/cacheada-depois.jpg",
+      alt: "Depois do atendimento de sobrancelhas e cílios em cliente de cabelo cacheado",
+      width: 1080,
+      height: 1440
+    },
     category: "combo",
     title: "Combo de cílios e sobrancelhas"
   },
   {
     id: "henna-close",
-    beforeSrc: "/images/antes-depois/henna-antes.jpg",
-    afterSrc: "/images/antes-depois/henna-depois.jpg",
-    beforeAlt: "Antes do design de sobrancelhas com henna em close do olhar",
-    afterAlt: "Depois do design de sobrancelhas com henna em close do olhar",
+    before: {
+      src: "/images/antes-depois/henna-antes.jpg",
+      alt: "Antes do design de sobrancelhas com henna em close do olhar",
+      width: 1080,
+      height: 1440
+    },
+    after: {
+      src: "/images/antes-depois/henna-depois.jpg",
+      alt: "Depois do design de sobrancelhas com henna em close do olhar",
+      width: 1080,
+      height: 1440
+    },
     category: "sobrancelhas",
     title: "Design com henna"
   },
   {
     id: "sobrancelhas-close",
-    beforeSrc: "/images/antes-depois/sobrancelhas-antes.jpg",
-    afterSrc: "/images/antes-depois/sobrancelhas-depois.jpg",
-    beforeAlt: "Antes do design de sobrancelhas em close do olhar",
-    afterAlt: "Depois do design de sobrancelhas em close do olhar",
+    before: {
+      src: "/images/antes-depois/sobrancelhas-antes.jpg",
+      alt: "Antes do design de sobrancelhas em close do olhar",
+      width: 1080,
+      height: 1080
+    },
+    after: {
+      src: "/images/antes-depois/sobrancelhas-depois.jpg",
+      alt: "Depois do design de sobrancelhas em close do olhar",
+      width: 540,
+      height: 540
+    },
     category: "sobrancelhas",
     title: "Design de sobrancelhas"
   }
@@ -118,6 +145,8 @@ export const beforeAfterResults: BeforeAfterResult[] = [
     id: "sobrancelhas-resultado-01",
     src: "/images/antes-depois/sobrancelhas-resultado-01.jpg",
     alt: "Resultado de design de sobrancelhas feito por Jeniffer Souza",
+    width: 540,
+    height: 960,
     category: "sobrancelhas",
     title: "Design de sobrancelhas",
     label: "Depois"
@@ -126,6 +155,8 @@ export const beforeAfterResults: BeforeAfterResult[] = [
     id: "cilios-sobrancelhas-resultado-01",
     src: "/images/antes-depois/cilios-sobrancelhas-resultado-01.jpg",
     alt: "Resultado de cílios e sobrancelhas feito por Jeniffer Souza",
+    width: 540,
+    height: 960,
     category: "combo",
     title: "Cílios e sobrancelhas",
     label: "Depois"
@@ -134,6 +165,8 @@ export const beforeAfterResults: BeforeAfterResult[] = [
     id: "combo-cilios-sobrancelhas-depois",
     src: "/images/antes-depois/combo-cilios-sobrancelhas-depois.jpg",
     alt: "Depois de atendimento de cílios e sobrancelhas em close do olhar",
+    width: 1080,
+    height: 1440,
     category: "combo",
     title: "Combo de cílios e sobrancelhas",
     label: "Depois"
