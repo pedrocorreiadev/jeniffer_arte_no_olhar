@@ -10,7 +10,7 @@ import {
   type BeforeAfterPair,
   type BeforeAfterResult,
   type Service,
-  type ServiceCategory
+  type ServiceCategory,
 } from "@/config/site";
 import { buildWhatsAppUrl, formatPrice } from "@/lib/whatsapp";
 
@@ -42,13 +42,13 @@ const navigation = [
   { href: "#servicos", label: "Serviços e valores" },
   { href: "#antes-depois", label: "Antes e depois" },
   { href: "#sobre", label: "Sobre" },
-  { href: "#contato", label: "Contato" }
+  { href: "#contato", label: "Contato" },
 ];
 
 const categoryLabels: Record<ServiceCategory, string> = {
   sobrancelhas: "Sobrancelhas",
   cilios: "Cílios",
-  combo: "Combo"
+  combo: "Combo",
 };
 
 export default function PortfolioSite() {
@@ -190,7 +190,7 @@ function Hero({ selectedService }: { selectedService: Service | null }) {
 function ServicesSection({
   selectedServiceId,
   selectedService,
-  onSelect
+  onSelect,
 }: {
   selectedServiceId: string;
   selectedService: Service | null;
@@ -200,7 +200,9 @@ function ServicesSection({
     <section className="section services-section" id="servicos">
       <div className="section-heading">
         <p className="eyebrow">Serviços e valores</p>
-        <h2>Escolha o atendimento que combina com o resultado que você procura.</h2>
+        <h2>
+          Escolha o atendimento que combina com o resultado que você procura.
+        </h2>
       </div>
 
       <div className="services-layout">
@@ -211,7 +213,9 @@ function ServicesSection({
 
             return (
               <label
-                className={isSelected ? "service-card is-selected" : "service-card"}
+                className={
+                  isSelected ? "service-card is-selected" : "service-card"
+                }
                 key={service.id}
               >
                 <input
@@ -233,8 +237,12 @@ function ServicesSection({
                     {isSelected ? "Selecionado" : "Escolher"}
                   </span>
                 </span>
-                <span className="service-description">{service.description}</span>
-                <span className="service-price">{formatPrice(service.price)}</span>
+                <span className="service-description">
+                  {service.description}
+                </span>
+                <span className="service-price">
+                  {formatPrice(service.price)}
+                </span>
               </label>
             );
           })}
@@ -247,7 +255,7 @@ function ServicesSection({
 }
 
 function ServiceSummary({
-  selectedService
+  selectedService,
 }: {
   selectedService: Service | null;
 }) {
@@ -267,7 +275,9 @@ function ServiceSummary({
             <WhatsAppIcon />
             <span>Consultar horários no WhatsApp</span>
           </a>
-          <p className="summary-note">O horário será combinado pelo WhatsApp.</p>
+          <p className="summary-note">
+            O horário será combinado pelo WhatsApp.
+          </p>
         </>
       ) : (
         <>
@@ -276,7 +286,11 @@ function ServiceSummary({
             O serviço e o valor selecionados aparecerão aqui antes de abrir a
             conversa.
           </p>
-          <button className="button button-primary summary-button" disabled type="button">
+          <button
+            className="button button-primary summary-button"
+            disabled
+            type="button"
+          >
             <WhatsAppIcon />
             <span>Consultar horários no WhatsApp</span>
           </button>
@@ -287,12 +301,13 @@ function ServiceSummary({
 }
 
 function BeforeAfterSection() {
-  const [activeCategory, setActiveCategory] = useState<ServiceCategory | "todos">(
-    "todos"
+  const [activeCategory, setActiveCategory] = useState<
+    ServiceCategory | "todos"
+  >("todos");
+  const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(
+    null,
   );
-  const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(null);
 
-  const hasPhotos = beforeAfterPairs.length > 0 || beforeAfterResults.length > 0;
   const availableCategories = useMemo(() => {
     const categories = new Set<ServiceCategory>();
     beforeAfterPairs.forEach((pair) => categories.add(pair.category));
@@ -301,15 +316,15 @@ function BeforeAfterSection() {
   }, []);
 
   const shouldShowFilters =
-    hasPhotos &&
     availableCategories.length > 1 &&
     beforeAfterPairs.length + beforeAfterResults.length >= 4;
 
   const filteredPairs = beforeAfterPairs.filter(
-    (pair) => activeCategory === "todos" || pair.category === activeCategory
+    (pair) => activeCategory === "todos" || pair.category === activeCategory,
   );
   const filteredResults = beforeAfterResults.filter(
-    (result) => activeCategory === "todos" || result.category === activeCategory
+    (result) =>
+      activeCategory === "todos" || result.category === activeCategory,
   );
 
   useEffect(() => {
@@ -332,64 +347,44 @@ function BeforeAfterSection() {
         <h2>Registros reais para comparar a valorização do olhar.</h2>
       </div>
 
-      {!hasPhotos ? (
-        <div className="empty-media-panel">
-          <p>
-            Os registros de antes e depois serão publicados aqui em breve.
-            Enquanto isso, conheça o portfólio pelo Instagram.
-          </p>
-          <a
-            className="button button-secondary"
-            href={business.instagramUrl}
-            target="_blank"
-            rel="noreferrer"
+      {shouldShowFilters ? (
+        <div className="filter-tabs" aria-label="Filtrar resultados">
+          <button
+            className={activeCategory === "todos" ? "is-active" : ""}
+            type="button"
+            onClick={() => setActiveCategory("todos")}
           >
-            <InstagramIcon />
-            <span>Ver Instagram</span>
-          </a>
+            Todos
+          </button>
+          {availableCategories.map((category) => (
+            <button
+              className={activeCategory === category ? "is-active" : ""}
+              key={category}
+              type="button"
+              onClick={() => setActiveCategory(category)}
+            >
+              {categoryLabels[category]}
+            </button>
+          ))}
         </div>
-      ) : (
-        <>
-          {shouldShowFilters ? (
-            <div className="filter-tabs" aria-label="Filtrar resultados">
-              <button
-                className={activeCategory === "todos" ? "is-active" : ""}
-                type="button"
-                onClick={() => setActiveCategory("todos")}
-              >
-                Todos
-              </button>
-              {availableCategories.map((category) => (
-                <button
-                  className={activeCategory === category ? "is-active" : ""}
-                  key={category}
-                  type="button"
-                  onClick={() => setActiveCategory(category)}
-                >
-                  {categoryLabels[category]}
-                </button>
-              ))}
-            </div>
-          ) : null}
+      ) : null}
 
-          <div className="gallery-grid">
-            {filteredPairs.map((pair) => (
-              <BeforeAfterCard
-                key={pair.id}
-                pair={pair}
-                onOpen={setLightboxImage}
-              />
-            ))}
-            {filteredResults.map((result) => (
-              <AfterResultCard
-                key={result.id}
-                result={result}
-                onOpen={setLightboxImage}
-              />
-            ))}
-          </div>
-        </>
-      )}
+      <div className="gallery-grid">
+        {filteredPairs.map((pair) => (
+          <BeforeAfterCard
+            key={pair.id}
+            pair={pair}
+            onOpen={setLightboxImage}
+          />
+        ))}
+        {filteredResults.map((result) => (
+          <AfterResultCard
+            key={result.id}
+            result={result}
+            onOpen={setLightboxImage}
+          />
+        ))}
+      </div>
 
       {lightboxImage ? (
         <div
@@ -424,7 +419,7 @@ function BeforeAfterSection() {
 
 function AfterResultCard({
   result,
-  onOpen
+  onOpen,
 }: {
   result: BeforeAfterResult;
   onOpen: (image: LightboxImage) => void;
@@ -439,7 +434,7 @@ function AfterResultCard({
           alt: result.alt,
           width: result.width,
           height: result.height,
-          title: result.title
+          title: result.title,
         })
       }
     >
@@ -462,7 +457,7 @@ function AfterResultCard({
 
 function BeforeAfterCard({
   pair,
-  onOpen
+  onOpen,
 }: {
   pair: BeforeAfterPair;
   onOpen: (image: LightboxImage) => void;
@@ -479,7 +474,7 @@ function BeforeAfterCard({
               alt: pair.before.alt,
               width: pair.before.width,
               height: pair.before.height,
-              title: `${pair.title} - Antes`
+              title: `${pair.title} - Antes`,
             })
           }
         >
@@ -502,7 +497,7 @@ function BeforeAfterCard({
               alt: pair.after.alt,
               width: pair.after.width,
               height: pair.after.height,
-              title: `${pair.title} - Depois`
+              title: `${pair.title} - Depois`,
             })
           }
         >
@@ -534,8 +529,8 @@ function AboutSection() {
         <p>
           Sou Jeniffer Souza e meu trabalho é valorizar a beleza do olhar. Atuo
           com Cílios Look Francês e design de sobrancelhas em Rio Branco - AC.
-          Conheça os serviços e entre em contato para conversar sobre o resultado
-          que você procura.
+          Conheça os serviços e entre em contato para conversar sobre o
+          resultado que você procura.
         </p>
         <a className="button button-primary" href="#servicos">
           Escolher meu serviço
@@ -546,7 +541,7 @@ function AboutSection() {
 }
 
 function ContactSection({
-  selectedService
+  selectedService,
 }: {
   selectedService: Service | null;
 }) {
@@ -556,8 +551,7 @@ function ContactSection({
         <p className="eyebrow">Contato</p>
         <h2>Vamos valorizar o seu olhar?</h2>
         <p>
-          Selecione um serviço e consulte horários diretamente pelo WhatsApp. O
-          atendimento é combinado por conversa, sem cadastro no site.
+          Selecione um serviço e consulte horários diretamente pelo WhatsApp.
         </p>
         <div className="contact-actions">
           <a
@@ -626,7 +620,7 @@ function Footer({ selectedService }: { selectedService: Service | null }) {
 }
 
 function FloatingWhatsApp({
-  selectedService
+  selectedService,
 }: {
   selectedService: Service | null;
 }) {
@@ -644,7 +638,7 @@ function FloatingWhatsApp({
 }
 
 function MobileBookingBar({
-  selectedService
+  selectedService,
 }: {
   selectedService: Service | null;
 }) {
@@ -653,7 +647,11 @@ function MobileBookingBar({
   }
 
   return (
-    <div className="mobile-booking-bar" role="region" aria-label="Serviço selecionado">
+    <div
+      className="mobile-booking-bar"
+      role="region"
+      aria-label="Serviço selecionado"
+    >
       <div>
         <span>{selectedService.shortName}</span>
         <strong>{formatPrice(selectedService.price)}</strong>

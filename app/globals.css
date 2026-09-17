@@ -595,21 +595,6 @@ p {
   width: 100%;
 }
 
-.empty-media-panel {
-  display: grid;
-  gap: 1rem;
-  max-width: 720px;
-  border: 1px solid rgba(149, 82, 81, 0.16);
-  border-radius: var(--radius);
-  padding: clamp(1rem, 5vw, 1.6rem);
-  background: rgba(255, 253, 251, 0.66);
-}
-
-.empty-media-panel p {
-  margin: 0;
-  color: var(--muted);
-}
-
 .filter-tabs {
   display: flex;
   flex-wrap: wrap;
