@@ -589,11 +589,14 @@ function ContactSection({
 }
 
 function Footer({ selectedService }: { selectedService: Service | null }) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="site-footer">
-      <div>
+      <div className="footer-brand">
         <strong>{business.ownerName}</strong>
         <span>{business.brandName}</span>
+        <small>{business.location}</small>
       </div>
       <nav aria-label="Links sociais">
         <a
@@ -615,6 +618,10 @@ function Footer({ selectedService }: { selectedService: Service | null }) {
           <span>WhatsApp</span>
         </a>
       </nav>
+      <p className="footer-rights">
+        © {currentYear} {business.ownerName} | {business.brandName}. Todos os
+        direitos reservados.
+      </p>
     </footer>
   );
 }
