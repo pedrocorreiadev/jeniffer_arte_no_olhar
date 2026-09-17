@@ -126,6 +126,7 @@ p {
   min-height: 42px;
   align-items: center;
   justify-content: center;
+  gap: 0.42rem;
   border: 1px solid transparent;
   border-radius: 999px;
   padding: 0.72rem 1rem;
@@ -138,6 +139,17 @@ p {
     border-color 180ms ease,
     background 180ms ease,
     color 180ms ease;
+}
+
+.button svg,
+.hero-whatsapp svg,
+.floating-whatsapp svg,
+.mobile-booking-bar svg,
+.social-link svg {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  fill: currentColor;
 }
 
 .button:hover {
@@ -232,8 +244,11 @@ p {
 
 .menu-toggle {
   display: inline-grid;
-  width: 46px;
-  height: 46px;
+  width: 38px;
+  height: 38px;
+  align-content: center;
+  gap: 3px;
+  justify-items: center;
   place-items: center;
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -243,7 +258,7 @@ p {
 
 .menu-toggle span {
   display: block;
-  width: 18px;
+  width: 14px;
   height: 2px;
   border-radius: 99px;
   background: var(--coffee);
@@ -875,6 +890,12 @@ p {
   gap: 0.85rem;
 }
 
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+}
+
 .floating-whatsapp {
   position: fixed;
   right: 1rem;
@@ -884,6 +905,7 @@ p {
   min-height: 52px;
   align-items: center;
   justify-content: center;
+  gap: 0.42rem;
   border-radius: 999px;
   padding: 0.85rem 1rem;
   background: var(--marsala);
@@ -999,6 +1021,8 @@ p {
     right: var(--section-inline);
     bottom: 2.3rem;
     display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
     color: var(--marsala);
     font-size: 0.9rem;
     font-weight: 850;
@@ -1015,6 +1039,79 @@ p {
 
   .gallery-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .results-section {
+    padding-top: clamp(1.35rem, 3vw, 2.4rem);
+    padding-bottom: clamp(1.7rem, 3.4vw, 2.8rem);
+  }
+
+  .results-section .section-heading {
+    margin-bottom: 0.75rem;
+  }
+
+  .results-section .section-heading h2 {
+    max-width: 24ch;
+    font-size: clamp(1.45rem, 2.45vw, 2.25rem);
+  }
+
+  .filter-tabs {
+    gap: 0.45rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .filter-tabs button {
+    min-height: 34px;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.82rem;
+  }
+
+  .after-result-card,
+  .before-after-card {
+    gap: 0.48rem;
+    padding: 0.55rem;
+  }
+
+  .before-after-card h3 {
+    font-size: 0.88rem;
+  }
+
+  .before-after-grid {
+    gap: 0.35rem;
+  }
+
+  .after-result-media,
+  .before-after-grid button {
+    display: grid;
+    place-items: center;
+  }
+
+  .before-after-grid .result-image {
+    width: auto;
+    max-width: 100%;
+    max-height: clamp(118px, 20vh, 185px);
+    object-fit: contain;
+  }
+
+  .after-result-media .result-image {
+    width: auto;
+    max-width: 100%;
+    max-height: clamp(135px, 24vh, 220px);
+    object-fit: contain;
+  }
+
+  .after-result-media span,
+  .before-after-grid span {
+    left: 0.4rem;
+    bottom: 0.4rem;
+    padding: 0.28rem 0.42rem;
+    font-size: 0.68rem;
+  }
+
+  .after-result-card strong {
+    font-size: 0.9rem;
+    line-height: 1.2;
   }
 
   .about-section {

@@ -22,6 +22,22 @@ type LightboxImage = {
   title?: string;
 };
 
+function WhatsAppIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="M12 3.25a8.6 8.6 0 0 0-7.39 13.02L3.75 20.5l4.33-.82A8.61 8.61 0 1 0 12 3.25Zm0 1.7a6.91 6.91 0 0 1 5.83 10.62 6.85 6.85 0 0 1-8.97 2.36l-.28-.16-2.56.49.5-2.5-.18-.29A6.91 6.91 0 0 1 12 4.95Zm-2.33 3.6c-.16 0-.42.06-.64.32-.22.27-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.67 2.67 4.12 3.64 2.03.8 2.45.64 2.89.6.44-.04 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.44-.54-.44h-.47Z" />
+    </svg>
+  );
+}
+
+function InstagramIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24">
+      <path d="M7.7 3.75h8.6a3.96 3.96 0 0 1 3.95 3.95v8.6a3.96 3.96 0 0 1-3.95 3.95H7.7a3.96 3.96 0 0 1-3.95-3.95V7.7A3.96 3.96 0 0 1 7.7 3.75Zm0 1.75A2.2 2.2 0 0 0 5.5 7.7v8.6a2.2 2.2 0 0 0 2.2 2.2h8.6a2.2 2.2 0 0 0 2.2-2.2V7.7a2.2 2.2 0 0 0-2.2-2.2H7.7Zm4.3 3.05a3.45 3.45 0 1 1 0 6.9 3.45 3.45 0 0 1 0-6.9Zm0 1.75a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Zm4.04-2.58a.82.82 0 1 1 0 1.64.82.82 0 0 1 0-1.64Z" />
+    </svg>
+  );
+}
+
 const navigation = [
   { href: "#servicos", label: "Serviços e valores" },
   { href: "#antes-depois", label: "Antes e depois" },
@@ -118,7 +134,8 @@ function Header({ selectedService }: { selectedService: Service | null }) {
           rel="noreferrer"
           onClick={closeMenu}
         >
-          Conversar no WhatsApp
+          <WhatsAppIcon />
+          <span>Conversar no WhatsApp</span>
         </a>
       </div>
     </header>
@@ -163,7 +180,8 @@ function Hero({ selectedService }: { selectedService: Service | null }) {
         target="_blank"
         rel="noreferrer"
       >
-        Conversar pelo WhatsApp
+        <WhatsAppIcon />
+        <span>Conversar pelo WhatsApp</span>
       </a>
     </section>
   );
@@ -246,7 +264,8 @@ function ServiceSummary({
             target="_blank"
             rel="noreferrer"
           >
-            Consultar horários no WhatsApp
+            <WhatsAppIcon />
+            <span>Consultar horários no WhatsApp</span>
           </a>
           <p className="summary-note">O horário será combinado pelo WhatsApp.</p>
         </>
@@ -258,7 +277,8 @@ function ServiceSummary({
             conversa.
           </p>
           <button className="button button-primary summary-button" disabled type="button">
-            Consultar horários no WhatsApp
+            <WhatsAppIcon />
+            <span>Consultar horários no WhatsApp</span>
           </button>
         </>
       )}
@@ -324,7 +344,8 @@ function BeforeAfterSection() {
             target="_blank"
             rel="noreferrer"
           >
-            Ver Instagram
+            <InstagramIcon />
+            <span>Ver Instagram</span>
           </a>
         </div>
       ) : (
@@ -428,7 +449,7 @@ function AfterResultCard({
           alt={result.alt}
           width={result.width}
           height={result.height}
-          sizes="(min-width: 900px) 32vw, 100vw"
+          sizes="(min-width: 900px) 18vw, 100vw"
           loading="lazy"
           className="result-image"
         />
@@ -467,7 +488,7 @@ function BeforeAfterCard({
             alt={pair.before.alt}
             width={pair.before.width}
             height={pair.before.height}
-            sizes="(min-width: 900px) 20vw, 50vw"
+            sizes="(min-width: 900px) 10vw, 50vw"
             loading="lazy"
             className="result-image"
           />
@@ -490,7 +511,7 @@ function BeforeAfterCard({
             alt={pair.after.alt}
             width={pair.after.width}
             height={pair.after.height}
-            sizes="(min-width: 900px) 20vw, 50vw"
+            sizes="(min-width: 900px) 10vw, 50vw"
             loading="lazy"
             className="result-image"
           />
@@ -545,7 +566,8 @@ function ContactSection({
             target="_blank"
             rel="noreferrer"
           >
-            Chamar no WhatsApp
+            <WhatsAppIcon />
+            <span>Chamar no WhatsApp</span>
           </a>
           <a
             className="button button-secondary"
@@ -553,7 +575,8 @@ function ContactSection({
             target="_blank"
             rel="noreferrer"
           >
-            Ver Instagram
+            <InstagramIcon />
+            <span>Ver Instagram</span>
           </a>
         </div>
         <dl className="contact-details">
@@ -579,11 +602,23 @@ function Footer({ selectedService }: { selectedService: Service | null }) {
         <span>{business.brandName}</span>
       </div>
       <nav aria-label="Links sociais">
-        <a href={business.instagramUrl} target="_blank" rel="noreferrer">
-          Instagram
+        <a
+          className="social-link"
+          href={business.instagramUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <InstagramIcon />
+          <span>Instagram</span>
         </a>
-        <a href={buildWhatsAppUrl(selectedService)} target="_blank" rel="noreferrer">
-          WhatsApp
+        <a
+          className="social-link"
+          href={buildWhatsAppUrl(selectedService)}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <WhatsAppIcon />
+          <span>WhatsApp</span>
         </a>
       </nav>
     </footer>
@@ -602,7 +637,8 @@ function FloatingWhatsApp({
       target="_blank"
       rel="noreferrer"
     >
-      WhatsApp
+      <WhatsAppIcon />
+      <span>WhatsApp</span>
     </a>
   );
 }
@@ -628,7 +664,8 @@ function MobileBookingBar({
         target="_blank"
         rel="noreferrer"
       >
-        WhatsApp
+        <WhatsAppIcon />
+        <span>WhatsApp</span>
       </a>
     </div>
   );
